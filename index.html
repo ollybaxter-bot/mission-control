@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>💣 Jarvis Mission Control</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0e17; color: #c8d6e5; min-height: 100vh; padding: 24px; }
+  h1 { color: #fff; font-size: 24px; margin-bottom: 8px; }
+  .subtitle { color: #576574; font-size: 14px; margin-bottom: 32px; }
+  .board { display: flex; gap: 16px; overflow-x: auto; padding-bottom: 16px; }
+  .column { background: #111827; border-radius: 12px; min-width: 280px; max-width: 320px; flex: 1; padding: 16px; border: 1px solid #1e293b; }
+  .column-header { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid; }
+  .column-header h2 { font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
+  .col-backlog .column-header { border-color: #6366f1; }
+  .col-backlog .column-header h2 { color: #6366f1; }
+  .col-progress .column-header { border-color: #f59e0b; }
+  .col-progress .column-header h2 { color: #f59e0b; }
+  .col-waiting .column-header { border-color: #8b5cf6; }
+  .col-waiting .column-header h2 { color: #8b5cf6; }
+  .col-done .column-header { border-color: #10b981; }
+  .col-done .column-header h2 { color: #10b981; }
+  .count { background: #1e293b; color: #94a3b8; font-size: 12px; padding: 2px 8px; border-radius: 10px; }
+  .card { background: #1a2332; border: 1px solid #1e293b; border-radius: 8px; padding: 12px; margin-bottom: 8px; cursor: default; transition: border-color 0.2s; }
+  .card:hover { border-color: #334155; }
+  .card-title { font-size: 14px; color: #e2e8f0; margin-bottom: 6px; }
+  .card-meta { font-size: 11px; color: #475569; }
+  .tag { display: inline-block; font-size: 10px; padding: 2px 6px; border-radius: 4px; margin-right: 4px; margin-top: 6px; }
+  .tag-research { background: #1e3a5f; color: #60a5fa; }
+  .tag-leadership { background: #3b1f4a; color: #c084fc; }
+  .tag-process { background: #1a3a2a; color: #6ee7b7; }
+  .tag-setup { background: #3a2f1a; color: #fbbf24; }
+  .tag-strategy { background: #3a1a1a; color: #fca5a5; }
+  .tag-comms { background: #1a2a3a; color: #93c5fd; }
+  .pulse { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; animation: pulse 2s infinite; }
+  .pulse-amber { background: #f59e0b; }
+  .pulse-green { background: #10b981; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .stats { display: flex; gap: 24px; margin-bottom: 24px; flex-wrap: wrap; }
+  .stat { background: #111827; border: 1px solid #1e293b; border-radius: 8px; padding: 16px 20px; }
+  .stat-value { font-size: 28px; font-weight: 700; color: #fff; }
+  .stat-label { font-size: 12px; color: #475569; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+  .updated { text-align: right; color: #334155; font-size: 11px; margin-top: 16px; }
+</style>
+</head>
+<body>
+
+<h1>💣 Jarvis Mission Control</h1>
+<p class="subtitle">Olly's strategic command centre — updated by Jarvis autonomously</p>
+
+<div class="stats">
+  <div class="stat">
+    <div class="stat-value">24</div>
+    <div class="stat-label">Total Tasks</div>
+  </div>
+  <div class="stat">
+    <div class="stat-value">2</div>
+    <div class="stat-label">In Progress</div>
+  </div>
+  <div class="stat">
+    <div class="stat-value">11</div>
+    <div class="stat-label">Completed</div>
+  </div>
+  <div class="stat">
+    <div class="stat-value">Day 4</div>
+    <div class="stat-label">Uptime</div>
+  </div>
+</div>
+
+<div class="board">
+
+  <div class="column col-backlog">
+    <div class="column-header">
+      <h2>📥 Backlog</h2>
+      <span class="count">9</span>
+    </div>
+    <div class="card">
+      <div class="card-title">CFO communication playbook</div>
+      <div class="card-meta">Managing up, reducing defensiveness, building trust</div>
+      <span class="tag tag-strategy">strategy</span>
+    </div>
+    <div class="card">
+      <div class="card-title">Consultant situation strategy</div>
+      <div class="card-meta">Own the narrative, turn threat into opportunity</div>
+      <span class="tag tag-strategy">strategy</span>
+    </div>
+    <div class="card">
+      <div class="card-title">Presentation confidence toolkit</div>
+      <div class="card-meta">Speaking with authority in large meetings</div>
+      <span class="tag tag-leadership">leadership</span>
+    </div>
+    <div class="card">
+      <div class="card-title">Delegation & escalation matrix</div>
+      <div class="card-meta">Stop being the default escalation point</div>
+      <span class="tag tag-leadership">leadership</span>
+    </div>
+    <div class="card">
+      <div class="card-title">90-day leadership sprint plan</div>
+      <div class="card-meta">Structured growth milestones</div>
+      <span class="tag tag-leadership">leadership</span>
+    </div>
+    <div class="card">
+      <div class="card-title">Exec relationship playbook</div>
+      <div class="card-meta">Building strategic alliances beyond IT</div>
+      <span class="tag tag-strategy">strategy</span>
+    </div>
+    <div class="card">
+      <div class="card-title">Vendor management playbook</div>
+      <div class="card-meta">Supplier reviews, contract leverage, SLAs</div>
+      <span class="tag tag-process">process</span>
+    </div>
+    <div class="card">
+      <div class="card-title">Stress & resilience toolkit</div>
+      <div class="card-meta">Practical techniques for anxiety, burnout prevention</div>
+      <span class="tag tag-leadership">leadership</span>
+    </div>
+    <div class="card">
+      <div class="card-title">Personal brand playbook</div>
+      <div class="card-meta">Visibility without self-promotion</div>
+      <span class="tag tag-comms">comms</span>
+    </div>
+  </div>
+
+  <div class="column col-progress">
+    <div class="column-header">
+      <h2>🔄 In Progress</h2>
+      <span class="count">2</span>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="pulse pulse-amber"></span>Model speed routing</div>
+      <div class="card-meta">Sonnet for chat, Opus for heavy tasks</div>
+      <span class="tag tag-setup">setup</span>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="pulse pulse-amber"></span>Kanban board hosting</div>
+      <div class="card-meta">Deploy to GitHub Pages for mobile access</div>
+      <span class="tag tag-setup">setup</span>
+    </div>
+  </div>
+
+  <div class="column col-waiting">
+    <div class="column-header">
+      <h2>⏳ Waiting</h2>
+      <span class="count">2</span>
+    </div>
+    <div class="card">
+      <div class="card-title">Telegram bot avatar</div>
+      <div class="card-meta">Image sent — needs Olly to set via BotFather</div>
+      <span class="tag tag-setup">setup</span>
+    </div>
+    <div class="card">
+      <div class="card-title">GitHub Pages deploy</div>
+      <div class="card-meta">Waiting on Olly's GitHub PAT</div>
+      <span class="tag tag-setup">setup</span>
+    </div>
+  </div>
+
+  <div class="column col-done">
+    <div class="column-header">
+      <h2>✅ Done</h2>
+      <span class="count">11</span>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="pulse pulse-green"></span>Morning Brief cron</div>
+      <div class="card-meta">Mon-Fri 7:30 AM GMT → Telegram</div>
+      <span class="tag tag-setup">setup</span>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="pulse pulse-green"></span>Monday Leadership Prep</div>
+      <div class="card-meta">10:30 AM GMT every Monday → Telegram</div>
+      <span class="tag tag-setup">setup</span>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="pulse pulse-green"></span>LinkedIn Drafts cron</div>
+      <div class="card-meta">Sun-Thu 7:00 PM GMT → 5 draft posts</div>
+      <span class="tag tag-comms">comms</span>
+    </div>
+    <div class="card">
+      <div class="card-title">Competitor landscape research</div>
+      <div class="card-meta">Hotel mgmt companies, IT leaders, tech strategies</div>
+      <span class="tag tag-research">research</span>
+    </div>
+    <div class="card">
+      <div class="card-title">Demand & prioritisation framework</div>
+      <div class="card-meta">Scoring model for project intake</div>
+      <span class="tag tag-process">process</span>
+    </div>
+    <div class="card">
+      <div class="card-title">Capacity dashboard model</div>
+      <div class="card-meta">Team resource planning template</div>
+      <span class="tag tag-process">process</span>
+    </div>
+    <div class="card">
+      <div class="card-title">Jarvis avatar generated</div>
+      <div class="card-meta">Arc reactor style — sent to Olly</div>
+      <span class="tag tag-setup">setup</span>
+    </div>
+    <div class="card">
+      <div class="card-title">Full profile documented</div>
+      <div class="card-meta">Team structure, goals, challenges, roadmap</div>
+      <span class="tag tag-setup">setup</span>
+    </div>
+    <div class="card">
+      <div class="card-title">Telegram connected & paired</div>
+      <div class="card-meta">@Jarvy23_bot active</div>
+      <span class="tag tag-setup">setup</span>
+    </div>
+    <div class="card">
+      <div class="card-title">Identity & soul configured</div>
+      <div class="card-meta">SOUL.md, IDENTITY.md, USER.md</div>
+      <span class="tag tag-setup">setup</span>
+    </div>
+    <div class="card">
+      <div class="card-title">Mission Control created</div>
+      <div class="card-meta">This board 💣</div>
+      <span class="tag tag-setup">setup</span>
+    </div>
+  </div>
+
+</div>
+
+<div class="updated">Last updated: 18 Feb 2026 — Day 4</div>
+
+</body>
+</html>
